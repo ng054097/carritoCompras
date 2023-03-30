@@ -8,7 +8,7 @@ public class CarritoDeCompras {
     Supermercado supermercado;
     private ArrayList<Producto> productos= new ArrayList<>();
     private Producto producto;
-
+ nestor gil
     public CarritoDeCompras(Supermercado supermercado,ArrayList<Producto> productos) {
         this.supermercado=supermercado;
         this.productos = productos;
