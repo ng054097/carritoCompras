@@ -37,7 +37,6 @@ public class CarritoDeCompras {
 
 
     public void agregarProducto(Producto producto ){
-this.productos=null;
         Producto productoAAgregar = supermercado.enviarProductoAlCarrito(producto);
 
      boolean existe = productos.contains(producto);
