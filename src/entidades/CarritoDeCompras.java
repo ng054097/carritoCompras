@@ -47,10 +47,13 @@ public class CarritoDeCompras {
 
 
     public void eliminarProducto( Producto productoPorEliminar){
+        if(productos.contains(productoPorEliminar)){
 
-        boolean existe = productos.contains(productoPorEliminar);
+            supermercado.agregarProductoEnStock(productoPorEliminar);
+            productos.remove(productoPorEliminar);
 
-        if(existe){productos.remove(productoPorEliminar);}
+        }
+
     }
 
 
