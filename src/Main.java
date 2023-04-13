@@ -6,19 +6,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Supermercado supermercado= new Supermercado() ;
-        CarritoDeCompras carritoDeCompras= new CarritoDeCompras();
-
-
-
-
-
-
-        supermercado.agregarProductoEnStock(new Producto("Fideos"));
-        supermercado.agregarProductoEnStock(new Producto("Arroz"));
-        supermercado.agregarProductoEnStock(new Producto("Fideos"));
-        supermercado.agregarProductoEnStock(new Producto("Atun"));
-
 
 
     }

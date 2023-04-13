@@ -13,20 +13,16 @@ public class Producto {
 
     }
 
-    @Override
-    public String toString() {
-        return "Producto{" +
-                "nombreDelProducto='" + nombreDelProducto + '\'' +
-                '}';
+    public Producto() {
+        getNombreDelProducto();
     }
 
-    public Producto() {
-    }
     public long cantidadProducto(ArrayList<Producto> listaDeProductoStock ,String nombreDeProducto ) {
 
         return  listaDeProductoStock.stream().filter(x->x.getNombreDelProducto()==nombreDeProducto).count();
 
     }
+
 
     public String getNombreDelProducto() {
         return nombreDelProducto;

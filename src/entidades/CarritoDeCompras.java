@@ -8,8 +8,7 @@ public class CarritoDeCompras {
     Supermercado supermercado;
     private ArrayList<Producto> productos= new ArrayList<>();
     private Producto producto;
- nestor gil
-    public CarritoDeCompras(Supermercado supermercado,ArrayList<Producto> productos) {
+    public CarritoDeCompras(Supermercado supermercado) {
         this.supermercado=supermercado;
         this.productos = productos;
     }
@@ -18,6 +17,7 @@ public class CarritoDeCompras {
     }
 
     public ArrayList<Producto> getProductos() {
+
         return productos;
     }
 
@@ -26,77 +26,46 @@ public class CarritoDeCompras {
     }
 
 
-    public long cantidadProductoDeNombreX (String nombreProducto){
-    return productos.stream().filter(producto -> this.producto.getNombreDelProducto()==nombreProducto).count();
 
+
+
+
+
+    public long unidadesDeProductosConNombre(String nombreProducto){
+    return productos.stream().filter(producto -> producto.getNombreDelProducto()==nombreProducto).count();
     }
 
-    public Producto productoXNombre (String nombreProducto){
-        return  productos.stream().filter(producto -> producto.getNombreDelProducto()==nombreProducto).findAny().orElse(null);
+
+    public void agregarProducto(String nombreProducto) {
+        boolean existe = supermercado.existeProductoConNombre(nombreProducto);
+        if (existe) {
+            this.productos.add(this.supermercado.darProductoConNombre(nombreProducto));
+        }
     }
 
 
-    public void agregarProducto(Producto producto ){
-        Producto productoAAgregar = supermercado.enviarProductoAlCarrito(producto);
-
-     boolean existe = productos.contains(producto);
-
-     if (existe){productos.add(productoAAgregar);}
-       }
 
 
 
-    public void eliminarProducto( Producto productoPorEliminar){
-        if(productos.contains(productoPorEliminar)){
+    public void devolverProducto(String nombreProducto){
+        boolean existe = unidadesDeProductosConNombre(nombreProducto) > 0;
+        if(existe){
+            Producto producto1= productos.stream().filter(producto2 -> producto2.getNombreDelProducto()==nombreProducto).findFirst().get();
+            this.supermercado.agregarProductoEnStock(producto1);
+            this.productos.remove(producto1);
+        }
+    }
 
-            supermercado.agregarProductoEnStock(productoPorEliminar);
-            productos.remove(productoPorEliminar);
 
+    public void definirCantidadDeProducto(String nombreProducto, int cantidad) {
+        List<Producto> productosADevolver =productos.stream().filter(producto -> producto.getNombreDelProducto()==nombreProducto ).collect(Collectors.toList());
+        productosADevolver.forEach(producto1 -> devolverProducto(producto1.getNombreDelProducto()));
+
+        int i;
+        for(i=0; i<cantidad; i++){
+            agregarProducto(nombreProducto);
         }
 
-    }
-
-
-
-
-
-    public List<Producto> CantidadProd(Producto producto){
-
-        return supermercado.getListaDeProductos().stream().filter(x->x.equals(producto)).collect(Collectors.toList());
-
-    }
-
-}
-
-
-//        public void AgregarProcuctos (String nombreProducto){
-//        do{
-//
-//        Producto productosPorAgregar= supermercado.dameProducto("yerba");
-//        Scanner leer = new Scanner(System.in);
-//        System.out.println(" Digame el nommbre del producto" );
-//        productosPorAgregar.setNombreDelProducto(leer.next());
-//        supermercado.listaDeProductos.add(productosPorAgregar);
-//
-//
-//
-//            Iterator iterador = supermercado.listaDeProductos.iterator();
-//
-//            while(iterador.hasNext()){
-//
-//               Producto productosDelIterador= (Producto) iterador.next();
-//                if ( productosPorAgregar.getNombreDelProducto().equalsIgnoreCase(productosDelIterador.nombreDelProducto)){
-//
-//                    productosDelIterador.cantidadDeProductos= productosDelIterador.cantidadDeProductos + 1;
-//                }
-//
-//
-//
-//            }
-//            System.out.println(" desea agregar otro producto?");
-//            String respuesta=leer.next();
-//        }while(respuesta.equalsIgnoreCase("Si"));
-
-
+}}
 
 
